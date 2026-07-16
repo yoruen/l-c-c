@@ -1,0 +1,16 @@
+[package]
+name = "lcc-plugin-systemd"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+lcc-plugin-api = { path = "../../crates/plugin-api" }
+zbus = { workspace = true }
+tokio = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+async-trait = { workspace = true }
+tracing = { workspace = true }
+
+[lib]
+crate-type = ["cdylib", "rlib"]
