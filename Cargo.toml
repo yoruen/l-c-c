@@ -1,0 +1,90 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/core",
+    "crates/plugin-api",
+    "crates/package-engine",
+    "crates/service-engine",
+    "crates/hardware-engine",
+    "crates/storage-engine",
+    "crates/network-engine",
+    "crates/security-engine",
+    "crates/logs-engine",
+    "crates/backup-engine",
+    "apps/desktop/src-tauri",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+authors = ["Linux Control Center Contributors"]
+license = "GPL-3.0"
+repository = "https://github.com/linux-control-center/lcc"
+rust-version = "1.75"
+
+[workspace.dependencies]
+# Async runtime
+tokio = { version = "1.35", features = ["full", "tracing"] }
+tokio-util = { version = "0.7", features = ["full"] }
+
+# Serialization
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+# Database
+sqlx = { version = "0.7", features = ["runtime-tokio", "sqlite", "migrate", "chrono"] }
+
+# Error handling
+thiserror = "1.0"
+anyhow = "1.0"
+
+# Logging
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "json"] }
+
+# D-Bus integration
+zbus = { version = "4.0", features = ["tokio"] }
+
+# Polkit
+polkit = "0.2"
+
+# Time handling
+chrono = { version = "0.4", features = ["serde"] }
+
+# Configuration
+config = "0.14"
+toml = "0.8"
+
+# Plugin system
+libloading = "0.8"
+abi_stable = "0.11"
+
+# Utilities
+uuid = { version = "1.6", features = ["v4", "serde"] }
+regex = "1.10"
+lazy_static = "1.4"
+dashmap = "5.5"
+parking_lot = "0.12"
+rayon = "1.8"
+
+# Types
+indexmap = { version = "2.1", features = ["serde"] }
+
+# Testing
+mockall = "0.12"
+tempfile = "3.8"
+
+# Tauri (for workspace)
+tauri = { version = "2.0", features = ["tray-icon", "notification"] }
+tauri-build = "2.0"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true
+
+[profile.dev]
+opt-level = 0
+debug = true
