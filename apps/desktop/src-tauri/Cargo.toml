@@ -1,0 +1,24 @@
+[package]
+name = "linux-control-center-desktop"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+lcc-core = { path = "../../../crates/core" }
+lcc-plugin-api = { path = "../../../crates/plugin-api" }
+
+tauri = { workspace = true }
+tauri-build = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+tokio = { workspace = true }
+tracing = { workspace = true }
+anyhow = { workspace = true }
+
+[features]
+default = ["custom-protocol"]
+custom-protocol = ["tauri/custom-protocol"]
+
+[build-dependencies]
+tauri-build = { workspace = true }
